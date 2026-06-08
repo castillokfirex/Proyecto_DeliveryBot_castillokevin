@@ -227,6 +227,7 @@ este es una version final funcional del reporte diario todos los dias 6pm.
 ---
 
 
+
 ## ⚙️ Módulos del Sistema
 
 ### 1. Interfaz de Usuario (Telegram)
