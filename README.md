@@ -211,6 +211,22 @@ El bot funciona correctamente de extremo a extremo. El usuario pide un Perro Cal
 
 ---
 
+### paso 21 - bot funcional: flujo complto
+
+esta es la version final del bot con todo el sistema en funcionamiento correctamente, la raon por la que salen x rojas es por la limitaion de tokens diarias
+
+![Telegram - Conversación completa: agregar producto → confirmar pedido - todo el procedimineto funcional](evidencias/flujo final funcional.png)
+
+---
+
+### paso 22 - reporte diario : flujo secundario funcional
+
+este es una version final funcional del reporte diario todos los dias 6pm.
+![telegram - detalles_pedido por texto con funcionalidad de reporte](evidencias/deliverybot-reporte-diario.png)
+
+---
+
+
 ## ⚙️ Módulos del Sistema
 
 ### 1. Interfaz de Usuario (Telegram)
@@ -311,4 +327,5 @@ Usuario escribe  ──►  Telegram Bot  ──►  Code JS (parsea contexto)
 
 - 📊 [Google Sheets - DeliveryBot_DB](https://docs.google.com/spreadsheets/d/1Aw7EBQFR6jhHoPiIE32bPgvJeXnQsELQPvH3jEU6K58/edit?usp=sharing)
 - 🤖 Bot de Telegram: @Deliverybot_thecofe_bot
-- 📁 [Repositorio GitHub](TU_LINK_DEL_REPO)
+- 📁 [Repositorio GitHub](https://github.com/castillokfirex/Proyecto_DeliveryBot_castillokevin)
+
