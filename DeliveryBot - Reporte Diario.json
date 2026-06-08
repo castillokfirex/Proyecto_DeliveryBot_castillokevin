@@ -1,0 +1,140 @@
+{
+  "name": "DeliveryBot - Reporte Diario",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 18
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3d1b67b4-3de6-496a-b2cd-fc1eb6186a04",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Aw7EBQFR6jhHoPiIE32bPgvJeXnQsELQPvH3jEU6K58",
+          "mode": "list",
+          "cachedResultName": "deliverybot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Aw7EBQFR6jhHoPiIE32bPgvJeXnQsELQPvH3jEU6K58/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1004771565,
+          "mode": "list",
+          "cachedResultName": "pedidios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Aw7EBQFR6jhHoPiIE32bPgvJeXnQsELQPvH3jEU6K58/edit#gid=1004771565"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        192,
+        0
+      ],
+      "id": "95b126ab-5578-4ab9-a68b-56cd0a6a5bf9",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TxvA9FYKdVajE4bE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const pedidos = $input.all();\nconst hoy = new Date().toLocaleDateString('es-CO');\n\nconst pedidosHoy = pedidos.filter(p => p.json.fecha === hoy);\n\nif (pedidosHoy.length === 0) {\n  return [{ json: { reporte: '📊 No hubo pedidos hoy.' } }];\n}\n\nconst total = pedidosHoy.reduce((sum, p) => sum + Number(p.json.total_pago || 0), 0);\n\nconst productos = {};\npedidosHoy.forEach(p => {\n  const detalle = p.json.detalles_pedido || '';\n  if (!productos[detalle]) productos[detalle] = 0;\n  productos[detalle]++;\n});\n\nconst estrella = Object.entries(productos).sort((a,b) => b[1]-a[1])[0];\n\nconst reporte = `📊 REPORTE DIARIO DELIVERYBOT\n📅 Fecha: ${hoy}\n🛒 Pedidos: ${pedidosHoy.length}\n💰 Total vendido: $${total.toLocaleString()}\n⭐ Producto estrella: ${estrella ? estrella[0] : 'N/A'}`;\n\nreturn [{ json: { reporte } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "72b2c89f-ae05-46fa-8eb4-9f30141c0e6b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "6214429241",
+        "text": "={{ $json.reporte }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "19cf0e10-849b-44d1-886a-34a027ed0fd2",
+      "name": "Send a text message",
+      "webhookId": "14d805d1-d036-4ce6-b1ca-6afec2e28f6e",
+      "credentials": {
+        "telegramApi": {
+          "id": "3wRt4wxLN0GYSouV",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "39c45013-0fca-42ec-ad4c-2b9ddf20d573",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3c12ce69bb7272f317759090988ada8196bfe730a0c77b49473803d1f0452cb9"
+  },
+  "id": "outEp5phxyal79ca",
+  "tags": []
+}
