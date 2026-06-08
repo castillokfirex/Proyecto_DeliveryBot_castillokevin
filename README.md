@@ -215,7 +215,7 @@ El bot funciona correctamente de extremo a extremo. El usuario pide un Perro Cal
 
 esta es la version final del bot con todo el sistema en funcionamiento correctamente, la raon por la que salen x rojas es por la limitaion de tokens diarias
 
-![Telegram - Conversación completa: agregar producto → confirmar pedido - todo el procedimineto funcional](evidencias/flujo final funcional.png)
+![telegram - detalles_pedido por texto con funcionalidad de reporte](evidencias/flujofinalfuncional.png)
 
 ---
 
