@@ -330,3 +330,10 @@ Usuario escribe  ──►  Telegram Bot  ──►  Code JS (parsea contexto)
 - 🤖 Bot de Telegram: @Deliverybot_thecofe_bot
 - 📁 [Repositorio GitHub](https://github.com/castillokfirex/Proyecto_DeliveryBot_castillokevin)
 
+
+
+
+## evidencia examen 2,
+-kevin andres castillo pabon
+
+![n8n- flujo completo: notificacion stock bajo](evidencia_examen/image.png)
